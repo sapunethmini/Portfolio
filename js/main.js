@@ -269,9 +269,37 @@
     fixedContentPos: false
   });
 
+  // Typing animation for hero section
+  function typeWriter(element, text, speed, callback) {
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      } else if (callback) {
+        callback();
+      }
+    }
+    element.innerHTML = '';
+    typing();
+  }
 
-
-
+  document.addEventListener('DOMContentLoaded', function() {
+    // For the first slide
+    const nameEl = document.querySelector('.slider-item .text h1 span');
+    const jobEl = document.querySelector('.slider-item .text h2');
+    if (nameEl && jobEl) {
+      typeWriter(nameEl, 'Sapuni Nethmini', 80, function() {
+        typeWriter(jobEl, 'A Software Engineer Intern', 60);
+      });
+    }
+    // For the second slide
+    const designerEl = document.querySelector('.slider-item.mt-32 .text h1 span');
+    if (designerEl) {
+      typeWriter(designerEl, 'web designer', 80);
+    }
+  });
 
 })(jQuery);
 
